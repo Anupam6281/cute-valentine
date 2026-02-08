@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Shunu 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff4d6d, #ff8fab);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+    }
+
+    .card {
+      position: relative;
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 22px 20px 70px;
+      width: 92%;
+      max-width: 360px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    .cats {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .cats img {
+      width: 70px;
+      height: 70px;
+      border-radius: 14px;
+      object-fit: cover;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 14px;
+    }
+
+    .bengali {
+      margin-bottom: 22px;
+    }
+
+    .bengali span {
+      display: inline-block;
+      margin: 4px 6px;
+      padding: 6px 12px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 100px;
+    }
+
+    button {
+      position: absolute;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: #22c55e;
+      color: white;
+      padding: 14px 24px;
+      font-size: 18px;
+      left: 20px;
+      bottom: 0;
+    }
+
+    #noBtn {
+      background: #ef4444;
+      color: white;
+      padding: 8px 14px; /* smaller */
+      font-size: 14px;
+      right: 20px;
+      bottom: 0;
+      opacity: 0.9;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 18px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh) scale(1.6);
+        opacity: 0;
+      }
+    }
+
+    .tap-note {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-top: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="music" autoplay loop>
+    <source src="" type="audio/mpeg">
+  </audio>
+
+  <div class="card" id="card">
+
+    <h1>Ki go Shunu 💕</h1>
+    <h2>Will you be my Valentine? 🌹</h2>
+
+      <!-- Cute Cat GIFs -->
+   <div class="dudu" id="topGif" >
+      <img width="45%" border-radius="18px" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOWN2M3o1MG1iY2l6b3M5Z2t0NWVteXdyeDFxa29vOW03dzYybGVmNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/1JmGiBtqTuehfYxuy9/giphy.gif" alt="dudu bubu cute">
+    </div>
+
+
+   <!-- <div class="bengali">
+      <span>Shudhu tumi</span>
+      <span>Amar mon</span>
+      <span>Bhalo lage</span>
+    </div>
+    -->
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 💔</button>
+    </div>
+
+    <div class="tap-note">(tap anywhere for music 🎵)</div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const card = document.getElementById("card");
+    const music = document.getElementById("music");
+
+    let scale = 1;
+
+    const words = [
+      "eta koro",
+      "edi thik na",
+      ":(((",
+      "really",
+      "tumi na vala"
+    ];
+    let index = 0;
+
+    document.body.addEventListener("click", () => {
+      music.play().catch(() => {});
+    }, { once: true });
+
+   noBtn.addEventListener("click", () => {
+  index = (index + 1) % words.length;
+  noBtn.textContent = words[index];
+
+  scale += 0.25;
+  yesBtn.style.transform = `scale(${scale})`;
+});
+
+    yesBtn.addEventListener("click", () => {
+      card.innerHTML = `
+        <h1>ABAR THIK ASE <img width="12%" border-radius="2px" src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2kzdjJkdHgxYmM4eG41azhscXB1YXM5dTlpY2VwYTl1ZGh0dnNwOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qFmdpUKAFZ6rMobzzu/giphy.gif"></h1>
+         <div class="dudu">
+          <img width="55%" border-radius="18px" src="https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" alt="dudu bubu kiss">
+        </div>
+      `;
+      launchHearts();
+    });
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+
+    function launchHearts() {
+      for (let i = 0; i < 40; i++) {
+        setTimeout(createHeart, i * 120);
+      }
+    }
+
+    setInterval(createHeart, 900);
+  </script>
+
+</body>
+</html>
